@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cloche D’Or – Restaurant</title>
+ <link rel="icon" href="Cloche-D'Or-Icon.ico" type="image/x-icon">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+:root {
+  --gold: #d4af63;
+  --darkgold: #a88742;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, #000, #1a1408);
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+nav a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: "Playfair Display", serif;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+nav a:hover { 
+  color: #fff;
+  background: rgba(0,0,0,0.2);
+}
+
+.dropdown .btn { 
+  background: #000; 
+  color: var(--gold); 
+  border: 1px solid var(--gold);
+  font-family: "Playfair Display", serif;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  min-height: 80vh;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.hero-bubble {
+  width: 400px;
+  height: 400px;
+  border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%;
+  background-image: url('https://i.ibb.co/VW87RcQt/IMG-4190.jpg');
+  background-size: cover;
+  background-position: center;
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 0 8px 25px rgba(212,175,99,0.5);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: 52px;
+  color: var(--gold);
+  margin-bottom: 15px;
+}
+
+.hero-sub {
+  font-size: 20px;
+  max-width: 500px;
+  opacity: 0.9;
+}
+
+/* MENU GRID */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin: 40px 10%;
+}
+
+.menu-card {
+  background: #111;
+  border: 1px solid var(--darkgold);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  transition: 0.3s;
+}
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(212,175,99,0.3);
+}
+.menu-img {
+  height: 170px;
+  background-size: cover;
+  background-position: center;
+}
+.menu-content {
+  padding: 15px;
+}
+.menu-content h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+}
+.menu-content p { color: #ddd; font-size: 14px; margin-top: 8px; }
+.price { color: var(--gold); margin-top: 10px; font-size: 16px; }
+
+/* PAGE HEADER (LEFT TEXT) */
+.page h1 {
+  font-family: "Playfair Display", serif;
+  color: var(--gold);
+  font-size: 48px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--gold);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* CONTACT */
+.contact-box {
+  background: #111;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid var(--darkgold);
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* MAP */
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.map-frame {
+  width: 500px;
+  height: 350px;
+  border: none;
+}
+.map-address {
+  max-width: 300px;
+  font-size: 18px;
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+}
+
+/* PAGE HIDE/SHOW */
+.page { display: none; padding-top: 120px; min-height: 100vh; }
+.active { display: block; }
+
+/* MOBILE */
+@media (max-width:900px){.menu-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:42px;} .page h1{font-size:36px;} }
+@media (max-width:600px){.menu-grid{grid-template-columns:1fr;}.hero-title{font-size:32px;}.page h1{font-size:28px;} }
+
+/* --- MOBILE FIXES --- */
+@media (max-width:900px){
+  .menu-grid{grid-template-columns:1fr 1fr;}
+  .hero-title{font-size:42px;}
+  .page h1{font-size:36px;}
+  nav a{padding:6px 8px; font-size:14px;}
+}
+
+@media (max-width:600px){
+  .menu-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:32px;}
+  .hero-sub{font-size:16px;}
+  .page h1{font-size:28px;}
+  header{flex-direction:column; align-items:flex-start; padding:10px 15px;}
+  nav{flex-wrap:wrap; gap:5px;}
+  .dropdown .btn{width:100%; margin-top:5px;}
+  .hero{flex-direction:column; margin-top:120px;}
+  .hero-bubble{width:300px; height:300px;}
+  .hero-text{max-width:90%;}
+  .map-frame{width:100%; height:300px;}
+  .map-address{font-size:16px; max-width:90%;}
+}
+</style>
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Cloche D’Or</div>
+  <nav>
+    <a href="#" onclick="openPage('home')">Accueil</a>
+    <a href="#" onclick="openPage('salades')">Salades</a>
+    <a href="#" onclick="openPage('sandwichs')">Sandwichs</a>
+    <a href="#" onclick="openPage('chaud')">Repas Chauds</a>
+    <a href="#" onclick="openPage('pizzas')">Pizzas</a>
+    <a href="#" onclick="openPage('kebabs')">Kebabs</a>
+    <a href="#" onclick="openPage('boissons')">Boissons</a>
+    <a href="#" onclick="openPage('map')">Où nous trouver</a>
+    <a href="#" onclick="openPage('contact')">Contact</a>
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        Langue <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#" onclick="changeLang('fr')">Français</a></li>
+        <li><a href="#" onclick="changeLang('en')">English</a></li>
+        <li><a href="#" onclick="changeLang('de')">Deutsch</a></li>
+        <li><a href="#" onclick="changeLang('lu')">Lëtzebuergesch</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div class="hero-bubble"></div>
+    <div class="hero-text">
+      <div class="hero-title" data-fr="Restaurant Cloche D’Or" data-en="Cloche D’Or Restaurant" data-de="Cloche D’Or Restaurant" data-lu="Cloche D’Or Restaurant">Restaurant Cloche D’Or</div>
+      <div class="hero-sub" data-fr="Une expérience culinaire moderne et élégante dans le cœur du shopping center." data-en="A modern and elegant dining experience in the heart of the shopping center." data-de="Ein modernes und elegantes kulinarisches Erlebnis im Herzen des Einkaufszentrums." data-lu="Eng modern an elegant kulinaresch Erfahrung am Häerz vum Shopping Center.">Une expérience culinaire moderne et élégante dans le cœur du shopping center.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const placeholder="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=600&q=60";
+
+const menuItems = {
+  "salades":[
+    {name:{fr:"Salade Royale d'Or",en:"Golden Royal Salad",de:"Goldene Royale Salat",lu:"Gold Kinneksalot"},desc:{fr:"Jeunes pousses, figues, parmesan, vinaigrette dorée.",en:"Baby greens, figs, parmesan, golden dressing.",de:"Junge Blätter, Feigen, Parmesan, goldene Vinaigrette.",lu:"Jonk Geméis, Feigen, Parmesan, gold Dressing."},price:"14.90€"},
+    {name:{fr:"Green Velvet",en:"Green Velvet",de:"Grüner Samt",lu:"Gréng Velvet"},desc:{fr:"Avocat, roquette, citron noir.",en:"Avocado, arugula, black lemon.",de:"Avocado, Rucola, schwarze Zitrone.",lu:"Avocado, Rucola, schwaarz Zitroun."},price:"12.50€"},
+    {name:{fr:"Signature C.D.O",en:"Signature C.D.O",de:"Signature C.D.O",lu:"Signature C.D.O"},desc:{fr:"Poulet mariné, noisettes torréfiées.",en:"Marinated chicken, roasted hazelnuts.",de:"Mariniertes Huhn, geröstete Haselnüsse.",lu:"Marinéierte Poulet, geréischtert Nosselen."},price:"13.40€"},
+    {name:{fr:"César Impériale",en:"Imperial Caesar",de:"Kaiser Caesar",lu:"Keeser Caesar"},desc:{fr:"Poulet, croûtons dorés.",en:"Chicken, golden croutons.",de:"Huhn, goldene Croutons.",lu:"Poulet, Gold Croûtons."},price:"11.90€"},
+    {name:{fr:"Orient Prestige",en:"Orient Prestige",de:"Orient Prestige",lu:"Orient Prestige"},desc:{fr:"Menthe, grenade, couscous perlé.",en:"Mint, pomegranate, pearl couscous.",de:"Minze, Granatapfel, Perlcouscous.",lu:"Minz, Granatapfel, Perl Couscous."},price:"15.20€"},
+    {name:{fr:"Fresh Garden Luxe",en:"Fresh Garden Luxe",de:"Frischer Garten Luxus",lu:"Frësch Gaart Luxe"},desc:{fr:"Laitue, radis, vinaigre blanc.",en:"Lettuce, radish, white vinegar.",de:"Salat, Radieschen, Weißweinessig.",lu:"Lettuce, Rettich, Wäiss Essig."},price:"10.90€"},
+    {name:{fr:"Gold Detox Mix",en:"Gold Detox Mix",de:"Gold Detox Mix",lu:"Gold Detox Mix"},desc:{fr:"Chou kale, agrumes.",en:"Kale, citrus fruits.",de:"Grünkohl, Zitrusfrüchte.",lu:"Kale, Zitrusfrüchte."},price:"13.20€"},
+    {name:{fr:"Perle Verte",en:"Green Pearl",de:"Grüne Perle",lu:"Gréng Perle"},desc:{fr:"Épinards, feta.",en:"Spinach, feta.",de:"Spinat, Feta.",lu:"Spinat, Feta."},price:"11.40€"},
+    {name:{fr:"Crystal Bowl",en:"Crystal Bowl",de:"Kristallschale",lu:"Kristall Bowl"},desc:{fr:"Quinoa, avocat, mangue.",en:"Quinoa, avocado, mango.",de:"Quinoa, Avocado, Mango.",lu:"Quinoa, Avocado, Mango."},price:"14.50€"}
+  ],
+  "sandwichs":[
+    {name:{fr:"Gold Club Deluxe",en:"Gold Club Deluxe",de:"Gold Club Deluxe",lu:"Gold Club Deluxe"},desc:{fr:"Poulet, cheddar doré.",en:"Chicken, golden cheddar.",de:"Huhn, goldener Cheddar.",lu:"Poulet, Gold Cheddar."},price:"9.90€"},
+    {name:{fr:"Royal Parisien",en:"Royal Parisian",de:"Königlicher Pariser",lu:"Kinneks Paräisser"},desc:{fr:"Jambon truffé, beurre fin.",en:"Truffled ham, fine butter.",de:"Trüffelschinken, feine Butter.",lu:"Trüffel Schanken, feine Botter."},price:"8.40€"},
+    {name:{fr:"Brioche Supreme",en:"Supreme Brioche",de:"Supreme Brioche",lu:"Supreme Brioche"},desc:{fr:"Boeuf tendre, oignons confits.",en:"Tender beef, caramelized onions.",de:"Zartes Rind, karamellisierte Zwiebeln.",lu:"Zart Rëndfleesch, kandéiert Zwiwwelen."},price:"12.90€"},
+    {name:{fr:"Italian Velvet",en:"Italian Velvet",de:"Italienischer Samt",lu:"Italien Velvet"},desc:{fr:"Mozza, pesto basilic.",en:"Mozzarella, basil pesto.",de:"Mozzarella, Basilikumpesto.",lu:"Mozza, Basil Pesto."},price:"9.50€"},
+    {name:{fr:"C.D.O Crunch",en:"C.D.O Crunch",de:"C.D.O Crunch",lu:"C.D.O Crunch"},desc:{fr:"Poulet croustillant.",en:"Crispy chicken.",de:"Knuspriges Huhn.",lu:"Knusprech Poulet."},price:"10.10€"},
+    {name:{fr:"Prestige Smoked",en:"Prestige Smoked",de:"Prestige Geräuchert",lu:"Prestige Smoked"},desc:{fr:"Saumon fumé, citron.",en:"Smoked salmon, lemon.",de:"Geräucherter Lachs, Zitrone.",lu:"Geréischtert Lachs, Zitroun."},price:"11.70€"},
+    {name:{fr:"Black Brioche Melt",en:"Black Brioche Melt",de:"Schwarzer Brioche Melt",lu:"Schwaarz Brioche Melt"},desc:{fr:"Cheddar vieilli.",en:"Aged cheddar.",de:"Gereifter Cheddar.",lu:"Gereift Cheddar."},price:"9.20€"},
+    {name:{fr:"Mediterranea Gold",en:"Mediterranea Gold",de:"Mediterranea Gold",lu:"Mediterranea Gold"},desc:{fr:"Poivrons, olives.",en:"Peppers, olives.",de:"Paprika, Oliven.",lu:"Peffer, Oliven."},price:"8.90€"},
+    {name:{fr:"Soft Honey Roast",en:"Soft Honey Roast",de:"Sanft Honig Braten",lu:"Sanft Hunneg Roast"},desc:{fr:"Dinde miel.",en:"Honey turkey.",de:"Honig Truthahn.",lu:"Hunneg Päerd."},price:"10.30€"}
+  ],
+  "chaud":[
+    {name:{fr:"Poulet Royal Gold",en:"Royal Gold Chicken",de:"Königliches Gold Huhn",lu:"Kinneks Gold Poulet"},desc:{fr:"Poulet rôti, jus doré.",en:"Roast chicken, golden jus.",de:"Brathähnchen, goldene Sauce.",lu:"Geröst Poulet, Gold Jus."},price:"17.90€"},
+    {name:{fr:"Risotto Truffe Noire",en:"Black Truffle Risotto",de:"Schwarzer Trüffel Risotto",lu:"Schwaarz Trüffel Risotto"},desc:{fr:"Crème, parmesan.",en:"Cream, parmesan.",de:"Sahne, Parmesan.",lu:"Crème, Parmesan."},price:"21.50€"},
+    {name:{fr:"Pâtes Impériales",en:"Imperial Pasta",de:"Kaiserliche Pasta",lu:"Keeser Pasta"},desc:{fr:"Sauce luxe or.",en:"Golden luxury sauce.",de:"Goldene Luxussauce.",lu:"Gold Luxeszooss."},price:"18.30€"},
+    {name:{fr:"Boeuf C.D.O",en:"C.D.O Beef",de:"C.D.O Rind",lu:"C.D.O Rëndfleesch"},desc:{fr:"Cuisson lente.",en:"Slow cooked.",de:"Langsam gegart.",lu:"Lues gekacht."},price:"24.90€"},
+    {name:{fr:"Saumon Velvet",en:"Velvet Salmon",de:"Velvet Lachs",lu:"Velvet Lachs"},desc:{fr:"Citron noir.",en:"Black lemon.",de:"Schwarze Zitrone.",lu:"Schwaarz Zitroun."},price:"19.50€"},
+    {name:{fr:"Wok Orient Luxe",en:"Orient Luxe Wok",de:"Orient Luxus Wok",lu:"Orient Luxe Wok"},desc:{fr:"Sésame, légumes.",en:"Sesame, vegetables.",de:"Sesam, Gemüse.",lu:"Sesam, Geméis."},price:"16.90€"},
+    {name:{fr:"Curry Royal",en:"Royal Curry",de:"Königliches Curry",lu:"Kinneks Curry"},desc:{fr:"Épices or.",en:"Golden spices.",de:"Goldene Gewürze.",lu:"Gold Gewierzer."},price:"15.90€"},
+    {name:{fr:"Steak d’Or",en:"Golden Steak",de:"Goldenes Steak",lu:"Gold Steak"},desc:{fr:"Frites dorées.",en:"Golden fries.",de:"Goldene Pommes.",lu:"Gold Fritten."},price:"25.50€"},
+    {name:{fr:"Légumes Prestige",en:"Prestige Vegetables",de:"Prestige Gemüse",lu:"Prestige Geméis"},desc:{fr:"Grillés, huile d’or.",en:"Grilled, golden oil.",de:"Gegrillt, goldenes Öl.",lu:"Gegrillt, Gold Ueleg."},price:"14.20€"}
+  ],
+  "pizzas":[
+    {name:{fr:"Pizza Royale",en:"Royal Pizza",de:"Königliche Pizza",lu:"Kinneks Pizza"},desc:{fr:"Mozza, jambon, or.",en:"Mozza, ham, gold.",de:"Mozza, Schinken, Gold.",lu:"Mozza, Schanken, Gold."},price:"12.50€"},
+    {name:{fr:"Pizza Margherita Luxe",en:"Luxury Margherita",de:"Luxus Margherita",lu:"Luxus Margherita"},desc:{fr:"Tomates, basilic.",en:"Tomatoes, basil.",de:"Tomaten, Basilikum.",lu:"Tomaten, Basilikum."},price:"11.00€"},
+    {name:{fr:"Pizza C.D.O",en:"C.D.O Pizza",de:"C.D.O Pizza",lu:"C.D.O Pizza"},desc:{fr:"Poulet, champignons.",en:"Chicken, mushrooms.",de:"Huhn, Pilze.",lu:"Poulet, Pilze."},price:"13.50€"},
+    {name:{fr:"Pizza Orientale",en:"Oriental Pizza",de:"Orient Pizza",lu:"Orient Pizza"},desc:{fr:"Olives, épices.",en:"Olives, spices.",de:"Oliven, Gewürze.",lu:"Oliven, Gewierzer."},price:"12.90€"},
+    {name:{fr:"Pizza Truffe",en:"Truffle Pizza",de:"Trüffel Pizza",lu:"Trüffel Pizza"},desc:{fr:"Crème, parmesan.",en:"Cream, parmesan.",de:"Sahne, Parmesan.",lu:"Crème, Parmesan."},price:"15.90€"},
+    {name:{fr:"Pizza Vegetarienne Prestige",en:"Prestige Veggie Pizza",de:"Prestige Veggie Pizza",lu:"Prestige Veggie Pizza"},desc:{fr:"Légumes grillés.",en:"Grilled vegetables.",de:"Gegrilltes Gemüse.",lu:"Gegrillt Geméis."},price:"13.20€"},
+    {name:{fr:"Pizza Saumon Luxe",en:"Luxury Salmon Pizza",de:"Lachs Luxus Pizza",lu:"Lachs Luxus Pizza"},desc:{fr:"Saumon fumé.",en:"Smoked salmon.",de:"Geräucherter Lachs.",lu:"Geréischtert Lachs."},price:"16.50€"},
+    {name:{fr:"Pizza Chèvre d’Or",en:"Golden Goat Pizza",de:"Goldener Ziegenkäse Pizza",lu:"Gold Ziegenkéis Pizza"},desc:{fr:"Chèvre, miel.",en:"Goat cheese, honey.",de:"Ziegenkäse, Honig.",lu:"Ziegenkéis, Hunneg."},price:"14.90€"},
+    {name:{fr:"Pizza 4 Fromages Prestige",en:"4 Cheese Prestige Pizza",de:"4 Käse Prestige Pizza",lu:"4 Kéis Prestige Pizza"},desc:{fr:"Mozza, cheddar, parmesan, bleu.",en:"Mozza, cheddar, parmesan, blue.",de:"Mozza, Cheddar, Parmesan, Blau.",lu:"Mozza, Cheddar, Parmesan, Blo."},price:"15.20€"}
+  ],
+  "kebabs":[
+    {name:{fr:"Kebab Royale",en:"Royal Kebab",de:"Königlicher Kebab",lu:"Kinneks Kebab"},desc:{fr:"Agneau, sauce or.",en:"Lamb, golden sauce.",de:"Lamm, goldene Sauce.",lu:"Lämm, Gold Sooss."},price:"11.50€"},
+    {name:{fr:"Kebab Poulet Luxe",en:"Luxury Chicken Kebab",de:"Luxus Hähnchen Kebab",lu:"Luxus Poulet Kebab"},desc:{fr:"Poulet mariné.",en:"Marinated chicken.",de:"Mariniertes Huhn.",lu:"Marinéierte Poulet."},price:"10.90€"},
+    {name:{fr:"Kebab Veggie Prestige",en:"Prestige Veggie Kebab",de:"Prestige Veggie Kebab",lu:"Prestige Veggie Kebab"},desc:{fr:"Légumes grillés.",en:"Grilled vegetables.",de:"Gegrilltes Gemüse.",lu:"Gegrillt Geméis."},price:"9.90€"},
+    {name:{fr:"Kebab Mix d’Or",en:"Golden Mix Kebab",de:"Goldener Mix Kebab",lu:"Gold Mix Kebab"},desc:{fr:"Agneau & Poulet.",en:"Lamb & Chicken.",de:"Lamm & Huhn.",lu:"Lämm & Poulet."},price:"12.90€"},
+    {name:{fr:"Kebab Saumon Luxe",en:"Luxury Salmon Kebab",de:"Lachs Luxus Kebab",lu:"Lachs Luxus Kebab"},desc:{fr:"Saumon grillé.",en:"Grilled salmon.",de:"Gegrillter Lachs.",lu:"Gegrillt Lachs."},price:"13.50€"},
+    {name:{fr:"Kebab Curry Royal",en:"Royal Curry Kebab",de:"Königliches Curry Kebab",lu:"Kinneks Curry Kebab"},desc:{fr:"Épices dorées.",en:"Golden spices.",de:"Goldene Gewürze.",lu:"Gold Gewierzer."},price:"11.90€"},
+    {name:{fr:"Kebab Chèvre d’Or",en:"Golden Goat Kebab",de:"Goldener Ziegenkebab",lu:"Gold Ziegenkebab"},desc:{fr:"Chèvre, miel.",en:"Goat cheese, honey.",de:"Ziegenkäse, Honig.",lu:"Ziegenkéis, Hunneg."},price:"12.20€"},
+    {name:{fr:"Kebab Oriental Luxe",en:"Oriental Luxury Kebab",de:"Orient Luxus Kebab",lu:"Orient Luxus Kebab"},desc:{fr:"Epices orientales.",en:"Oriental spices.",de:"Orientalische Gewürze.",lu:"Orient Gewierzer."},price:"10.90€"},
+    {name:{fr:"Kebab Frites d’Or",en:"Golden Fries Kebab",de:"Goldene Pommes Kebab",lu:"Gold Fritten Kebab"},desc:{fr:"Frites dorées.",en:"Golden fries.",de:"Goldene Pommes.",lu:"Gold Fritten."},price:"9.90€"}
+  ],
+  "boissons":[
+    {name:{fr:"Coca Doré",en:"Golden Coke",de:"Goldene Cola",lu:"Gold Cola"},desc:{fr:"Canette 33cl.",en:"Can 33cl.",de:"Dose 33cl.",lu:"Can 33cl."},price:"3.50€"},
+    {name:{fr:"Sprite Luxe",en:"Luxury Sprite",de:"Luxus Sprite",lu:"Luxus Sprite"},desc:{fr:"Canette 33cl.",en:"Can 33cl.",de:"Dose 33cl.",lu:"Can 33cl."},price:"3.50€"},
+    {name:{fr:"Eau Cristal",en:"Crystal Water",de:"Kristallwasser",lu:"Kristall Waasser"},desc:{fr:"Plate 50cl.",en:"Still 50cl.",de:"Still 50cl.",lu:"Still 50cl."},price:"2.50€"},
+    {name:{fr:"Eau Pétillante Prestige",en:"Prestige Sparkling Water",de:"Prestige Sprudelwasser",lu:"Prestige Sprudel Waasser"},desc:{fr:"50cl.",en:"50cl.",de:"50cl.",lu:"50cl."},price:"2.90€"},
+    {name:{fr:"Jus Orange Luxe",en:"Luxury Orange Juice",de:"Luxus Orangensaft",lu:"Luxus Orangensaft"},desc:{fr:"25cl.",en:"25cl.",de:"25cl.",lu:"25cl."},price:"3.80€"},
+    {name:{fr:"Jus Pomme d’Or",en:"Golden Apple Juice",de:"Goldener Apfelsaft",lu:"Gold Apfelsaft"},desc:{fr:"25cl.",en:"25cl.",de:"25cl.",lu:"25cl."},price:"3.80€"},
+    {name:{fr:"Thé Glacé Prestige",en:"Prestige Iced Tea",de:"Prestige Eistee",lu:"Prestige Iced Tea"},desc:{fr:"Citron ou pêche.",en:"Lemon or peach.",de:"Zitrone oder Pfirsich.",lu:"Zitroun oder Peach."},price:"3.50€"},
+    {name:{fr:"Café Royal",en:"Royal Coffee",de:"Königlicher Kaffee",lu:"Kinneks Kaffi"},desc:{fr:"Expresso.",en:"Espresso.",de:"Espresso.",lu:"Espresso."},price:"2.20€"},
+    {name:{fr:"Lait Doré",en:"Golden Milk",de:"Goldene Milch",lu:"Gold Mëllech"},desc:{fr:"Chaud 20cl.",en:"Hot 20cl.",de:"Heiß 20cl.",lu:"Heiss 20cl."},price:"2.90€"}
+  ]
+};
+
+function openPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  if(page==="salades" || page==="sandwichs" || page==="chaud" || page==="pizzas" || page==="kebabs" || page==="boissons") buildMenu(page);
+}
+
+function buildMenu(category){
+  const page=document.getElementById(category);
+  if(!page.querySelector('.menu-grid')){
+    page.innerHTML=`<h1 data-fr="${category}" data-en="${category}" data-de="${category}" data-lu="${category}">${category}</h1><div class="menu-grid"></div>`;
+    const grid=page.querySelector('.menu-grid');
+    menuItems[category].forEach(item=>{
+      const card=document.createElement('div'); card.className='menu-card';
+      card.innerHTML=`<div class="menu-img" style="background-image:url('${placeholder}')"></div>
+      <div class="menu-content">
+        <h3 data-fr="${item.name.fr}" data-en="${item.name.en}" data-de="${item.name.de}" data-lu="${item.name.lu}">${item.name.fr}</h3>
+        <p data-fr="${item.desc.fr}" data-en="${item.desc.en}" data-de="${item.desc.de}" data-lu="${item.desc.lu}">${item.desc.fr}</p>
+        <div class="price">${item.price}</div>
+      </div>`;
+      grid.appendChild(card);
+    });
+  }
+}
+
+function changeLang(lang){
+  document.querySelectorAll('[data-fr]').forEach(el=>{
+    el.textContent=el.dataset[lang];
+  });
+}
+</script>
+
+<!-- PAGE CONTAINERS -->
+<div id="salades" class="page"></div>
+<div id="sandwichs" class="page"></div>
+<div id="chaud" class="page"></div>
+<div id="pizzas" class="page"></div>
+<div id="kebabs" class="page"></div>
+<div id="boissons" class="page"></div>
+
+<div id="map" class="page">
+  <h1 data-fr="Où nous trouver" data-en="Where to find us" data-de="Wo zu finden" data-lu="Wou fanne mir eis">Où nous trouver</h1>
+  <div class="map-container">
+    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2608.0628603513214!2d6.1227181!3d49.5827144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479549f1a5d659ff%3A0x231fff6c48fc40f6!2sShopping%20Center%20Cloche%20d%27Or!5e0!3m2!1sen!2slu!4v0!5m2!1sen!2slu" allowfullscreen="" loading="lazy"></iframe>
+    <div class="map-address" data-fr="Shopping Center Cloche d’Or, Luxembourg" data-en="Shopping Center Cloche d’Or, Luxembourg" data-de="Shopping Center Cloche d’Or, Luxemburg" data-lu="Shopping Center Cloche d’Or, Lëtzebuerg">Shopping Center Cloche d’Or, Luxembourg</div>
+  </div>
+</div>
+
+<div id="contact" class="page">
+  <h1 data-fr="Contact" data-en="Contact" data-de="Kontakt" data-lu="Kontakt">Contact</h1>
+  <div class="contact-box">
+    <div><b data-fr="Email :" data-en="Email:" data-de="Email:" data-lu="Email:">Email :</b> contact@clochedor.lu</div>
+    <div><b data-fr="Téléphone :" data-en="Phone:" data-de="Telefon:" data-lu="Telefon:">Téléphone :</b> +352 621 345 678</div>
+    <div><b data-fr="Ouverture :" data-en="Opening Hours:" data-de="Öffnungszeiten:" data-lu="Ouverture:">Ouverture :</b></div>
+    <div data-fr="Lundi – Vendredi : 10h00 – 21h00" data-en="Monday – Friday: 10:00 – 21:00" data-de="Montag – Freitag: 10:00 – 21:00" data-lu="Méindes – Freides: 10:00 – 21:00">Lundi – Vendredi : 10h00 – 21h00</div>
+    <div data-fr="Samedi – Dimanche : 11h00 – 22h00" data-en="Saturday – Sunday: 11:00 – 22:00" data-de="Samstag – Sonntag: 11:00 – 22:00" data-lu="Samschdes – Sonndes: 11:00 – 22:00">Samedi – Dimanche : 11h00 – 22h00</div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+
