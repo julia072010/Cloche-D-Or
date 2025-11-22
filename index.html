@@ -400,9 +400,51 @@ function changeLang(lang){
     <div data-fr="Samedi – Dimanche : 11h00 – 22h00" data-en="Saturday – Sunday: 11:00 – 22:00" data-de="Samstag – Sonntag: 11:00 – 22:00" data-lu="Samschdes – Sonndes: 11:00 – 22:00">Samedi – Dimanche : 11h00 – 22h00</div>
   </div>
 </div>
+<script>
+ function createPetal() {
+  const container = document.getElementById('sakura-container');
+  const petal = document.createElement('div');
+  petal.classList.add('sakura');
 
+  const size = Math.random() * 10 + 5;
+  petal.style.width = `${size}px`;
+  petal.style.height = `${size}px`;
+  petal.style.left = Math.random() * window.innerWidth + 'px';
+  petal.style.top = '-20px';
+  petal.style.position = 'absolute';
+  petal.style.background = 'linear-gradient(45deg, #FFEB80, #FFD966)'; // light gold gradient
+  petal.style.borderRadius = '50%';
+  petal.style.opacity = Math.random() * 0.8 + 0.2;
+  petal.style.zIndex = 0;
+
+  container.appendChild(petal);
+
+  let fallSpeed = 1 + Math.random() * 2;
+  let drift = (Math.random() - 0.5) * 2;
+  let rotation = Math.random() * 360;
+
+  function animatePetal() {
+    const top = parseFloat(petal.style.top);
+    const left = parseFloat(petal.style.left);
+    petal.style.top = `${top + fallSpeed}px`;
+    petal.style.left = `${left + drift}px`;
+    rotation += 2;
+    petal.style.transform = `rotate(${rotation}deg)`;
+
+    if (top > window.innerHeight) {
+      petal.remove();
+    } else {
+      requestAnimationFrame(animatePetal);
+    }
+  }
+  requestAnimationFrame(animatePetal);
+}
+
+setInterval(createPetal, 120);
+<scipt>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
